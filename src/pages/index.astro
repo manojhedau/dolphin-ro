@@ -1,0 +1,231 @@
+---
+import "../styles/global.css";
+
+import { databases } from '../lib/appwrite.js';
+
+import Layout from "../components/Layout.astro";
+
+const products = await databases.listDocuments(
+  '68176b650023c14fe1cf',
+  '68176bb60008c8629f3e'
+);
+
+
+
+---
+
+
+<Layout>
+
+  <!-- Hero Section -->
+<section id="hero" class="w-full relative bg-gradient-to-t from-blue-500 to-blue-200 h-[85vh] text-center flex flex-col justify-center items-center text-white overflow-hidden px-4 sm:px-6 lg:px-8">
+  <div id="ripple" class="absolute inset-0 pointer-events-none z-0"></div>
+
+  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold z-10">
+    Pure Water, Healthier Life
+  </h1>
+
+  <p class="text-xl mt-4 max-w-2xl z-10">
+    Advanced water purification systems for your home and office. Experience the difference with Dolphin R.O Systems.
+  </p>
+
+  <div class="mt-10 w-full max-w-xs sm:max-w-none sm:w-auto flex flex-col items-center sm:flex-row gap-4 sm:gap-6 z-10">
+    <a href="#products" class="w-full sm:w-auto text-center bg-white text-blue-400 font-semibold px-6 py-3 rounded-md hover:bg-blue-100 transition duration-300">
+      Browse Products
+    </a>
+
+    <a href="tel:8140651390" class="w-full sm:w-auto text-center border border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-white hover:text-blue-600 transition duration-300">
+      Contact Us
+    </a>
+  </div>
+</section>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us" class="py-20 bg-white text-blue-500">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold mb-4">Why Choose Dolphin R.O Systems?</h2>
+      <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+        We deliver high-quality purification systems with exceptional service, tailored for your needs.
+      </p>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="feature-card bg-blue-50 rounded-md p-6">
+          <ion-icon name="water-outline" class="text-4xl text-blue-500 mb-4"></ion-icon>
+          <h3 class="text-xl font-semibold mb-2">Advanced Filtration</h3>
+          <p class="text-gray-600">Our multi-stage filtration ensures 99.9% purity, keeping your family safe and healthy.</p>
+        </div>
+        <div class="feature-card bg-blue-50 rounded-md p-6">
+          <ion-icon name="flash-outline" class="text-4xl text-blue-500 mb-4"></ion-icon>
+          <h3 class="text-xl font-semibold mb-2">Quick Installation</h3>
+          <p class="text-gray-600">Enjoy hassle-free, fast, and clean installation by our expert technicians.</p>
+        </div>
+        <div class="feature-card bg-blue-50 rounded-md p-6">
+          <ion-icon name="shield-checkmark-outline" class="text-4xl text-blue-500 mb-4"></ion-icon>
+          <h3 class="text-xl font-semibold mb-2">Trusted Support</h3>
+          <p class="text-gray-600">We're always just a call away. Experience dependable customer support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-20 bg-blue-50 text-blue-600">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-extrabold mb-4">Our Products</h2>
+      <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+        Discover our best-selling water purifiers crafted for quality and performance.
+      </p>
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {products.documents.map((product) => (
+          <div class="bg-white flex flex-col items-center rounded-md shadow transition duration-300 p-6">
+            <img
+              src={`${product.image_url.replace('&mode=admin', '')}`}
+              alt={product.name}
+              class="object-cover rounded-xl mb-4"
+              loading="lazy"
+              width="150"
+              height="auto"
+            />
+            <h3 class="text-xl font-bold mb-1">{product.name}</h3>
+            <span class="text-blue-600 font-semibold text-lg mb-2 block">₹{new Intl.NumberFormat('en-IN', {maximumFractionDigits: 2}).format(product.price)}</span>
+            <p class="text-gray-600 text-sm mb-6">{product.description}</p>
+            <a
+              href={product.$id}
+              class="inline-block bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition duration-300"
+            >
+              Read More
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="bg-white text-blue-500">
+    <div class="mx-auto flex flex-col lg:flex-row items-center gap-12">
+      <div class="lg:w-1/2 w-full">
+        <img src="ro-service.avif" alt="RO Services" class="w-full h-auto" />
+      </div>
+      <div class="lg:w-1/2 w-full px-6 lg:px-20 py-20">
+        <h2 class="text-4xl font-bold mb-4">Our Services</h2>
+        <p class="text-gray-600 mb-8">
+          We offer comprehensive services to keep your water purification systems running at peak performance.
+        </p>
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <ion-icon name="settings-outline" class="text-3xl text-blue-500 mt-1"></ion-icon>
+            <div>
+              <h3 class="text-xl font-semibold">Installation</h3>
+              <p class="text-gray-600 text-sm">Expert setup of all purification units with performance optimization.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="refresh-outline" class="text-3xl text-blue-500 mt-1"></ion-icon>
+            <div>
+              <h3 class="text-xl font-semibold">Maintenance</h3>
+              <p class="text-gray-600 text-sm">Scheduled maintenance for long-term reliability and cleanliness.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="medkit-outline" class="text-3xl text-blue-500 mt-1"></ion-icon>
+            <div>
+              <h3 class="text-xl font-semibold">Repair</h3>
+              <p class="text-gray-600 text-sm">Quick repair services for all brands and models of water purifiers.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="water-outline" class="text-3xl text-blue-500 mt-1"></ion-icon>
+            <div>
+              <h3 class="text-xl font-semibold">Filter Replacement</h3>
+              <p class="text-gray-600 text-sm">Affordable and fast replacement of sediment, carbon, and RO membranes.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="home-outline" class="text-3xl text-blue-500 mt-1"></ion-icon>
+            <div>
+              <h3 class="text-xl font-semibold">Home Service Visits</h3>
+              <p class="text-gray-600 text-sm">Convenient in-home servicing at your preferred schedule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-blue-50 text-blue-500">
+    <div class="container mx-auto px-6 lg:px-20 flex flex-col lg:flex-row items-start gap-12">
+      <div class="lg:w-1/2 w-full">
+        <h2 class="text-4xl font-bold mb-6">Contact Us</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Get in touch with us for product inquiries, service bookings, or any other questions.
+        </p>
+        <div class="space-y-6 text-gray-700">
+          <div class="flex items-start gap-4">
+            <ion-icon name="location-outline" class="text-2xl text-blue-600 mt-1"></ion-icon>
+            <div>
+              <h4 class="font-semibold text-blue-500">Store Location</h4>
+              <p>Dolphin R.O Systems, Ahmedabad, Gujarat, India</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="call-outline" class="text-2xl text-blue-600 mt-1"></ion-icon>
+            <div>
+              <h4 class="font-semibold text-blue-500">Phone</h4>
+              <p>+91 814 065 1390</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="mail-outline" class="text-2xl text-blue-600 mt-1"></ion-icon>
+            <div>
+              <h4 class="font-semibold text-blue-500">Email</h4>
+              <p>manojhedau45519@gmail.com</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <ion-icon name="time-outline" class="text-2xl text-blue-600 mt-1"></ion-icon>
+            <div>
+              <h4 class="font-semibold text-blue-500">Working Hours</h4>
+              <p>Mon – Sat: 9:00 AM – 7:00 PM<br />Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3671.1135446385792!2d72.67236277531484!3d23.05629847915018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDAzJzIyLjciTiA3MsKwNDAnMjkuOCJF!5e0!3m2!1sen!2sin!4v1746350692322!5m2!1sen!2sin" width="100%" height="425px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+import { gsap } from 'gsap';
+  const hero = document.getElementById("hero");
+  const rippleContainer = document.getElementById("ripple");
+
+  hero.addEventListener("mousemove", (e) => {
+    const ripple = document.createElement("div");
+    const x = e.clientX - hero.getBoundingClientRect().left;
+    const y = e.clientY - hero.getBoundingClientRect().top;
+
+    ripple.className = "absolute w-32 h-32 bg-white opacity-20 rounded-full pointer-events-none";
+    ripple.style.left = `${x - 64}px`;
+    ripple.style.top = `${y - 64}px`;
+
+    rippleContainer.appendChild(ripple);
+
+    gsap.fromTo(ripple,
+      {
+        scale: 0,
+        opacity: 0.4
+      },
+      {
+        scale: 2.5,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        onComplete: () => ripple.remove()
+      }
+    );
+  });
+</script>

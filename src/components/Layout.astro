@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import Header from "./Header.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+		<title>Astro</title>
+	
+	</head>
+	<body class="font-[Roboto] scroll-smooth flex flex-col min-h-screen">
+		<Header />
+
+        <main class="flex-grow ">
+            <slot />
+        </main>
+
+        <footer class="bg-blue-900 py-6 text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center md:flex-row md:justify-between">
+
+                <div class="mb-4 md:mb-0">
+                    <a href="/" aria-label="Back to Homepage">
+                        <h2 class="text-xl font-bold italic">Dolphin R.O Systems</h2>
+                    </a>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <p class="text-sm ">
+                        &copy; <span class="current-year"></span> Dolphin R.O Systems. All rights reserved.
+                    </p>
+                </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            const yearElements = document.querySelectorAll('.current-year');
+            yearElements.forEach(el => {
+                el.textContent = new Date().getFullYear();
+            });
+        </script>
+
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+	</body>
+</html>
