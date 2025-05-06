@@ -5,7 +5,9 @@ const { id } = Astro.params;
 
 <Layout>
   <main id="product-container" class="max-w-6xl mx-auto px-4 md:px-10 py-10" data-doc-id={id}>
-    <p>Loading...</p>
+    <div class="flex justify-center items-center py-20">
+      <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+    </div>
   </main>
 
   <script type="module">
@@ -58,7 +60,12 @@ const { id } = Astro.params;
           </div>
         `;
       } catch (err) {
-        document.querySelector('#product-container').innerHTML = `<p class="text-red-500">Failed to load product.</p>`;
+        document.querySelector('#product-container').innerHTML = `
+          <div class="flex items-center gap-3 text-red-600 border border-red-300 bg-red-50 p-4 rounded-md">
+            <ion-icon name="warning-outline" class="text-2xl"></ion-icon>
+            <span>Failed to load product. Please try again later.</span>
+          </div>
+        `;
         console.error('Appwrite fetch error:', err);
       }
     }
